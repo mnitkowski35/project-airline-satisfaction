@@ -1,14 +1,25 @@
-# Airline Satisfaction Prediction Project
+# Welcome to My Airline Passenger Satisfaction Analysis Presented by Matthew Nitkowski
 
 ## Overview
 
-Welcome to the Airline Satisfaction Prediction Project! This project aims to analyze and predict customer satisfaction with airlines based on a dataset available on Kaggle. Students will perform data cleaning, exploratory data analysis (EDA) using Plotly, build predictive models using KNN, Random Forest, and Logistic Regression, and showcase their results through a Streamlit app.
+In this project, I am building a Streamlit application that predicts the satisfaction of airline passengers based on a dataset. The dataset used in this project is the "Airline Passenger Satisfaction" dataset, which can be downloaded from Kaggle [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data). The dataset contains information about airline passengers, including features such as flight distance, seat comfort, inflight entertainment, and more.
 
-## Dataset
+We will be utilizing libraries such as Pandas, Seaborn, MatplotLib, Numpy, and SciKit Learn.
 
-The dataset used in this project is the "Airline Passenger Satisfaction" dataset, which can be downloaded from Kaggle [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data). The dataset contains information about airline passengers, including features such as flight distance, seat comfort, inflight entertainment, and more.
+## Data Cleaning and EDA
 
-## Task
-In this project, your primary task is to read the airline satisfaction dataset into a Jupyter Notebook that you will create. Begin by performing essential data cleaning tasks to ensure the dataset is ready for analysis. Utilize Plotly for initial exploratory data analysis (EDA), creating interactive visualizations to gain insights into the dataset. Subsequently, employ machine learning techniques, including K-Nearest Neighbors (KNN), Logistic Regression, and Random Forest, to build predictive models. Evaluate and compare the performance of these models to determine their effectiveness in predicting airline satisfaction-- don't forget to compare to a baseline model! Lastly, present your findings in a Streamlit app, providing an interactive and user-friendly platform to showcase the results of your analysis and model performance.
+I first noticed that there was an unnamed column with no data, so iI removed it.
 
-Happy coding, and good luck! ✈️📊🤖
+There was also a category, Arrival Delay in Minutes, with null values. Since it was numerical, I filled in the null values with the mean of the entire column.
+
+Those were the only data cleaning steps I did. However, I did need to make a few adjustments in my EDA for some categorical variables. I converted them to numbers so I could use them in my predictive models.
+
+> I got the dummies of categorical variables with two values: Gender, Customer Type, and Type of Travel.
+
+> For Class and Satisfaction, I mapped them because I wanted to specify which values were which. For class, Business was 0, Eco was 1, and Eco Plus was 2. For satisfaction, satisfied was 1 and neutral_or_dissatisfied was 0, as satisfaction is our target variable so I wanted satisfied to be 1. Getting the dummies of the target variable column was not ideal.
+
+I then built a heatmap to see which variables had the strongest correlation to heatmap. Once that was done, I built Linear Regression, Random Forest Classifier, K-Nearest-Neighbors, and Logistic Regression prediction models from a handful of features I selected. I used all models but Logistic Regression in my final draft.
+
+# Conclusion
+
+The variables that had the most impact on my model were online boarding, class, and type of travel. The strongest model was the Random Forest Classifier, with an accuracy of 95.9 percent. Our baseline model accuracy was 43.3 percent.
