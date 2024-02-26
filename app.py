@@ -9,6 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.preprocessing import StandardScaler
 
 # Reading in data
 
@@ -20,7 +21,7 @@ st.set_page_config(page_title = "Airline Passenger Satisfaction", page_icon = ':
 st.sidebar.header("Navigate to other pages here!")
 page = st.sidebar.selectbox("Select a Page",['Home','Data Overview','Exploratory Data Analysis','Predictive Modeling','Conclusion'])
 st.sidebar.divider()
-st.sidebar.write("I recommend reading the pages in order to gain a more comprehensive understanding of the application.")
+st.sidebar.write("I recommend reading the pages in the order in which they appear on the dropdown menu to gain a more comprehensive understanding of the application.")
 st.sidebar.divider()
 st.sidebar.write("A special thanks to CodingTemple Data Analytics instructor Katie Sylvia and the rest of the team at CodingTemple for their guidance in building this application.")
 
@@ -138,7 +139,8 @@ if page == 'Predictive Modeling':
             st.write("KNN, also known as K-Nearest-Neighbors, is a model that predicts the value of a variable based on its nearest neighbors, which is the value k.")
             st.write("K needs to be an odd number so we do not end up with a tie if there is a variation in nearest neighbors.In KNN tests, the default value for k is 5.")
             k_value = st.slider("Select the number of k:",min_value = 1, max_value = 29, step = 2, value= 5)
-            model = KNeighborsClassifier(n_neighbors = k_value)
+            
+            model = KNeighborsClassifier(n_neighbors = k_value, n_jobs = -1)
         if st.button("Let's check out our results! (May take a bit to load)"):
             model.fit(X_train,y_train)
         # Displaying results
@@ -151,6 +153,7 @@ if page == 'Predictive Modeling':
 if page == 'Conclusion':
     st.title("Final Results and Conclusion: What Did We Learn? :pencil2:")
     st.subheader("We finally made it to our conclusion! But what did we learn from our predictive models?")
+    st.markdown("Remember, we want our models to achieve a better score than .433, or 43.3 percent.")
     st.image("https://media.licdn.com/dms/image/C4D12AQEYUpGT_USmeQ/article-cover_image-shrink_720_1280/0/1602352478948?e=2147483647&v=beta&t=U5F8DKMeVWCOs0MvCkzMeSKom8BrCGZJORjtMLJn2JY")
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -162,7 +165,7 @@ if page == 'Conclusion':
         st.subheader("Testing Accuracy: 95.9%")
         st.write("Wow! RandomForest had an accuracy of almost 96 percent! This is likely due to the structure of RandomForest using multiple decision trees to predict a single result. We get to test a lot of options and use those options to come to a single result. Random Forest is a great predicition tool and I would recommend using it.")
     with col3:
-        st.header("K-Nearest-Neighbors Results")
+        st.header("K-Nearest Neighbors Results")
         st.subheader("Testing Accuracy: 84-86%")
         st.write("The testing accuracy for KNN is dependent on what you choose for the value of K, but the percentages are very similar, hovering around 84 to 86 percent. While not as accurate as Random Forest, it is still a very solid model and can predict the passenger's satisfaction pretty well.")
     st.divider()
